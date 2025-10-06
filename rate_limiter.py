@@ -36,6 +36,8 @@ import threading
 from abc import ABC, abstractmethod
 from dataclasses import dataclass
 from collections import deque
+from typing import Any, Callable
+
 
 @dataclass
 class Request:
@@ -68,7 +70,7 @@ class RateLimiter(ABC):
     
 
 class TokenBucket(RateLimiter):
-    def __init__(self, fill_rate: float, capacity: int, key_func=lambda req: req.user_id):
+    def __init__(self, fill_rate: float, capacity: int, key_func: Callable[[Request], Any]=lambda req: req.user_id):
         self.fill_rate = fill_rate
         self.capacity = capacity
         self.key_func = key_func
