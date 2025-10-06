@@ -26,9 +26,17 @@ If the request count exceeds the threshold, all the excess requests should be bl
 
 3.2 Common algorithms:
 - Token bucket
++ Pros: Easy to implement, memory efficient, allow burst
++ Cons: Hard to tune parameters (bucket size and token fill rate) correctly
 - Leaky bucket
++ Pros: Memory efficient, stable outflow rate
++ Cons: Burst requests fill up the queue, throttling recent requests
 - Fixed window
++ Pros: Memory efficient
++ Cons: Spiking requests at edge of windows let more request to go through
 - Sliding window counter
++ Pros: Smooth out spiked traffic, Memory efficient
++ Cons: Not so accurate in theory, only approximation of actual rate
 """
 
 import time
